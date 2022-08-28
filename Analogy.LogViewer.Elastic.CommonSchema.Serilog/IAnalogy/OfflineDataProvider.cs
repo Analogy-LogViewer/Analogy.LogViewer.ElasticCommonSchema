@@ -17,7 +17,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
 {
     public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
     {
-        public override Guid Id { get; set; } = new Guid("D89318C6-306A-48D9-90A0-7C2C49EFDA82");
+        public override Guid Id { get; set; } = new Guid("8f5b7e86-cb90-4281-8170-4b2342104a60");
         public override Image LargeImage { get; set; } = null;
         public override Image SmallImage { get; set; } = null;
         public override string OptionalTitle { get; set; } = "Serilog offline reader";
@@ -32,10 +32,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
              Directory.Exists(UserSettingsManager.UserSettings.Settings.Directory))
                 ? UserSettingsManager.UserSettings.Settings.Directory
                 : Environment.CurrentDirectory;
-        private CompactJsonFormatParser CompactFormatPerLineParser { get; }
-        private JsonFormatterParser JsonPerLineParser { get; }
-        private JsonFileParser CompactJsonFileParser { get; }
-        private JsonFileParser JsonFileParser { get; }
+        private EcsJsonFileParser EcsJsonFileParser { get; }
 
         public override bool UseCustomColors { get; set; } = false;
         public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
@@ -45,12 +42,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
             => (Color.Empty, Color.Empty);
         public OfflineDataProvider()
         {
-            CompactFormatPerLineParser = new CompactJsonFormatParser();
-            CompactJsonFileParser = new JsonFileParser(new CompactJsonFormatMessageFields());
-
-            JsonPerLineParser = new JsonFormatterParser(new JsonFormatMessageFields());
-            JsonFileParser = new JsonFileParser(new JsonFormatMessageFields());
-
+            EcsJsonFileParser = new EcsJsonFileParser(new JsonFormatMessageFields());
         }
         public override Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
@@ -62,27 +54,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
         {
             if (CanOpenFile(fileName))
             {
-                if (UserSettingsManager.UserSettings.Settings.FileFormatDetection == FileFormatDetection.Automatic ||
-                    UserSettingsManager.UserSettings.Settings.Format == FileFormat.Unknown)
-                {
-                    UserSettingsManager.UserSettings.Settings.Format = TryDetectFormat(fileName);
-                }
-
-                switch (UserSettingsManager.UserSettings.Settings.Format)
-                {
-                    case FileFormat.CompactJsonFormatPerLine:
-                        return await CompactFormatPerLineParser.Process(fileName, token, messagesHandler);
-                    case FileFormat.CompactJsonFormatPerFile:
-                        return await CompactJsonFileParser.Process(fileName, token, messagesHandler);
-                    case FileFormat.JsonFormatFile:
-                        return await JsonFileParser.Process(fileName, token, messagesHandler);
-                    case FileFormat.JsonFormatPerLine:
-                        return await JsonPerLineParser.Process(fileName, token, messagesHandler);
-                    case FileFormat.Unknown:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                return await EcsJsonFileParser.Process(fileName, token, messagesHandler);
             }
             LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
             return new List<AnalogyLogMessage>(0);
@@ -128,84 +100,84 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
             return files;
         }
 
-        public static FileFormat TryDetectFormat(string fileName)
-        {
-            string jsonData = string.Empty;
-            if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
-            {
-                using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                {
-                    using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
-                    {
-                        using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
-                        {
-                            jsonData = streamReader.ReadToEnd();
-                        }
-                    }
-                }
-            }
+        //public static FileFormat TryDetectFormat(string fileName)
+        //{
+        //    string jsonData = string.Empty;
+        //    if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
+        //    {
+        //        using (var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        //        {
+        //            using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
+        //            {
+        //                using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
+        //                {
+        //                    jsonData = streamReader.ReadToEnd();
+        //                }
+        //            }
+        //        }
+        //    }
 
-            if (string.IsNullOrEmpty(jsonData))
-            {
-                jsonData = SafeReadAllLines(fileName);
-            }
+        //    if (string.IsNullOrEmpty(jsonData))
+        //    {
+        //        jsonData = SafeReadAllLines(fileName);
+        //    }
 
-            var format = TryParseAsFile(jsonData);
-            if (format == FileFormat.Unknown)
-            {
-                format = TryParsePerLine(jsonData);
-            }
+        //    var format = TryParseAsFile(jsonData);
+        //    if (format == FileFormat.Unknown)
+        //    {
+        //        format = TryParsePerLine(jsonData);
+        //    }
 
-            return format;
-        }
-        private static FileFormat TryParsePerLine(string jsonData)
-        {
-            try
-            {
-                IMessageFields fields = new JsonFormatMessageFields();
-                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
-                {
-                    return FileFormat.JsonFormatPerLine;
-                }
+        //    return format;
+        //}
+        //private static FileFormat TryParsePerLine(string jsonData)
+        //{
+        //    try
+        //    {
+        //        IMessageFields fields = new JsonFormatMessageFields();
+        //        if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+        //        {
+        //            return FileFormat.JsonFormatPerLine;
+        //        }
 
-                fields = new CompactJsonFormatMessageFields();
-                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
-                {
-                    return FileFormat.CompactJsonFormatPerLine;
-                }
+        //        fields = new CompactJsonFormatMessageFields();
+        //        if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+        //        {
+        //            return FileFormat.CompactJsonFormatPerLine;
+        //        }
 
-                return FileFormat.Unknown;
-            }
-            catch (Exception)
-            {
-                return FileFormat.Unknown;
-            }
-        }
+        //        return FileFormat.Unknown;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return FileFormat.Unknown;
+        //    }
+        //}
 
-        private static FileFormat TryParseAsFile(string jsonData)
-        {
-            try
-            {
-                var jsonObject = JsonConvert.DeserializeObject(jsonData);
-                IMessageFields fields = new JsonFormatMessageFields();
-                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
-                {
-                    return FileFormat.JsonFormatFile;
-                }
+        //private static FileFormat TryParseAsFile(string jsonData)
+        //{
+        //    try
+        //    {
+        //        var jsonObject = JsonConvert.DeserializeObject(jsonData);
+        //        IMessageFields fields = new JsonFormatMessageFields();
+        //        if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+        //        {
+        //            return FileFormat.JsonFormatFile;
+        //        }
 
-                fields = new CompactJsonFormatMessageFields();
-                if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
-                {
-                    return FileFormat.CompactJsonFormatPerFile;
-                }
+        //        fields = new CompactJsonFormatMessageFields();
+        //        if (jsonData.Contains(fields.Timestamp) && jsonData.Contains(fields.MessageTemplate))
+        //        {
+        //            return FileFormat.CompactJsonFormatPerFile;
+        //        }
 
-                return FileFormat.Unknown;
-            }
-            catch (Exception)
-            {
-                return FileFormat.Unknown;
-            }
-        }
+        //        return FileFormat.Unknown;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return FileFormat.Unknown;
+        //    }
+        //}
 
         private static string SafeReadAllLines(string path)
         {

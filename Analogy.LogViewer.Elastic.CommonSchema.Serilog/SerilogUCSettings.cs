@@ -33,35 +33,8 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
             Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             Settings.IgnoredAttributes = lstbIgnoreColumn.Items.Count > 0 ? lstbIgnoreColumn.Items.Cast<string>().ToList() : new List<string>();
-            Settings.FileFormatDetection = rbDetectionModeAutomatic.Checked
-                ? FileFormatDetection.Automatic
-                : FileFormatDetection.Manual;
-            if (rbtnReset.Checked)
-            {
-                Settings.Format = FileFormat.Unknown;
-                rtxtExample.Text = "";
-            }
-            else if (rbtnCLEF.Checked)
-            {
-                Settings.Format = FileFormat.CompactJsonFormatPerLine;
-                rtxtExample.Text = Resources.CompactJsonFormatPerLine;
-            }
-            else if (rbtnJsonPerLine.Checked)
-            {
-                Settings.Format = FileFormat.JsonFormatPerLine;
-                rtxtExample.Text = Resources.JsonFormatPerLine;
-            }
-            else if (rbtnCompactJsonFile.Checked)
-            {
-                Settings.Format = FileFormat.CompactJsonFormatPerFile;
-                rtxtExample.Text = Resources.CompactJsonFormatPerFile;
-            }
-            else if (rbtnJsonFile.Checked)
-            {
-                Settings.Format = FileFormat.JsonFormatFile;
-                rtxtExample.Text = Resources.JsonFormatFile;
-            }
-
+            
+        
             Settings.UseApplicationFolderForSettings = rbtnApplicationFolder.Checked;
             UserSettingsManager.UserSettings.Save();
         }
@@ -131,13 +104,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
             txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
             lstbIgnoreColumn.Items.Clear();
             lstbIgnoreColumn.Items.AddRange(logSettings.IgnoredAttributes.ToArray());
-            rbtnCLEF.Checked = Settings.Format == FileFormat.CompactJsonFormatPerLine;
-            rbtnJsonPerLine.Checked = Settings.Format == FileFormat.JsonFormatPerLine;
-            rbtnCompactJsonFile.Checked = Settings.Format == FileFormat.CompactJsonFormatPerFile;
-            rbtnJsonFile.Checked = Settings.Format == FileFormat.JsonFormatFile;
-            rbtnReset.Checked = Settings.Format == FileFormat.Unknown;
-            rbDetectionModeAutomatic.Checked = Settings.FileFormatDetection == FileFormatDetection.Automatic;
-            rbDetectionModeManual.Checked = Settings.FileFormatDetection == FileFormatDetection.Manual;
+      
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)

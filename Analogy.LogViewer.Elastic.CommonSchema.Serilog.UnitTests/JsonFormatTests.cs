@@ -16,9 +16,9 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.UnitTests
         private string Folder { get; } = Environment.CurrentDirectory;
 
         [TestMethod]
-        public async Task CompactJsonFormatFullFileTest()
+        public async Task ECSFullFileTest()
         {
-            JsonFileParser parser = new JsonFileParser(new CompactJsonFormatMessageFields());
+            EcsJsonFileParser parser = new EcsJsonFileParser(new CompactJsonFormatMessageFields());
             CancellationTokenSource cts = new CancellationTokenSource();
             string fileName = Path.Combine(Folder, "log files", "JsonFileCompactFormat.clef");
             MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
@@ -30,52 +30,52 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.UnitTests
 
         }
 
-        [TestMethod]
-        public async Task JsonFilePerLineTest()
-        {
-            var p = new JsonFormatterParser(new JsonFormatMessageFields());
-            CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = Path.Combine(Folder, "log files", "JsonFormatPerLine.clef");
-            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
-            Assert.IsTrue(messages.Count == 2);
-            //Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
-            Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
-        }
+        //[TestMethod]
+        //public async Task JsonFilePerLineTest()
+        //{
+        //    var p = new JsonFormatterParser(new JsonFormatMessageFields());
+        //    CancellationTokenSource cts = new CancellationTokenSource();
+        //    string fileName = Path.Combine(Folder, "log files", "JsonFormatPerLine.clef");
+        //    MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+        //    var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+        //    Assert.IsTrue(messages.Count == 2);
+        //    //Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
+        //    Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
+        //}
 
-        [TestMethod]
-        public async Task JsonFilePerFileTest()
-        {
-            JsonFileParser parser = new JsonFileParser(new JsonFormatMessageFields());
-            CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = Path.Combine(Folder, "log files", "JsonFormatPerFile.clef");
-            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
-            Assert.IsTrue(messages.Count == 2);
-            //Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
-            Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
-        }
+        //[TestMethod]
+        //public async Task JsonFilePerFileTest()
+        //{
+        //    EcsJsonFileParser parser = new EcsJsonFileParser(new JsonFormatMessageFields());
+        //    CancellationTokenSource cts = new CancellationTokenSource();
+        //    string fileName = Path.Combine(Folder, "log files", "JsonFormatPerFile.clef");
+        //    MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+        //    var messages = (await parser.Process(fileName, cts.Token, forTesting)).ToList();
+        //    Assert.IsTrue(messages.Count == 2);
+        //    //Assert.IsTrue(messages[0].Text == "Hello, { Name: \"nblumhardt\", Tags: [1, 2, 3] }, 0000007b at 06/07/2016 06:44:57","got"+ messages[0].Text);
+        //    Assert.IsTrue(messages[0].User == "{ Name: \"nblumhardt\", Tags: [1, 2, 3] }");
+        //}
 
-        [TestMethod]
-        [DataRow("JsonFileCompactFormat.clef", FileFormat.CompactJsonFormatPerFile)]
-        [DataRow("JsonFormatPerLine.clef", FileFormat.JsonFormatPerLine)]
-        public void CompactJsonFormatTestAutomaticDetection(string fileName, FileFormat format)
-        {
-            string file = Path.Combine(Folder, "log files", fileName);
-            var type = OfflineDataProvider.TryDetectFormat(file);
-            Assert.IsTrue(type == format);
-        }
+        //[TestMethod]
+        //[DataRow("JsonFileCompactFormat.clef", FileFormat.CompactJsonFormatPerFile)]
+        //[DataRow("JsonFormatPerLine.clef", FileFormat.JsonFormatPerLine)]
+        //public void CompactJsonFormatTestAutomaticDetection(string fileName, FileFormat format)
+        //{
+        //    string file = Path.Combine(Folder, "log files", fileName);
+        //    var type = OfflineDataProvider.TryDetectFormat(file);
+        //    Assert.IsTrue(type == format);
+        //}
 
-        [TestMethod]
-        public async Task JsonFilePerLineDateTimeWithOffsetTest()
-        {
-            var p = new JsonFormatterParser(new JsonFormatMessageFields());
-            CancellationTokenSource cts = new CancellationTokenSource();
-            string fileName = Path.Combine(Folder, "log files", "JsonFormatPerLine.clef");
-            MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
-            var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
-            Assert.IsTrue(messages.Count == 2);
-        }
+        //[TestMethod]
+        //public async Task JsonFilePerLineDateTimeWithOffsetTest()
+        //{
+        //    var p = new JsonFormatterParser(new JsonFormatMessageFields());
+        //    CancellationTokenSource cts = new CancellationTokenSource();
+        //    string fileName = Path.Combine(Folder, "log files", "JsonFormatPerLine.clef");
+        //    MessageHandlerForTesting forTesting = new MessageHandlerForTesting();
+        //    var messages = (await p.Process(fileName, cts.Token, forTesting)).ToList();
+        //    Assert.IsTrue(messages.Count == 2);
+        //}
 
         //[TestMethod]
         //public async Task ECSParserTest()

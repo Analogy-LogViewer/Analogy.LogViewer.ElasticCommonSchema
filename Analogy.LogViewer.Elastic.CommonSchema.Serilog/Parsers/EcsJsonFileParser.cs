@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes;
+using Elastic.CommonSchema;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
 
 namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
 {
-    public class JsonFormatterParser
+    public class EcsJsonFileParser
     {
         private IMessageFields messageFields;
         private JsonSerializerSettings JsonSerializerSettings;
 
-        public JsonFormatterParser(IMessageFields messageFields)
+        public EcsJsonFileParser(IMessageFields messageFields)
         {
             this.messageFields = messageFields;
             JsonSerializerSettings = new JsonSerializerSettings
@@ -28,12 +29,10 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
-
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token,
-            ILogMessageCreatedHandler messagesHandler)
+          ILogMessageCreatedHandler messagesHandler)
         {
-            //var formatter = new JsonFormatter();
             List<AnalogyLogMessage> parsedMessages = new List<AnalogyLogMessage>();
             try
             {
@@ -108,7 +107,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
             {
                 AnalogyLogMessage empty = new AnalogyLogMessage($"Error reading file {fileName}: Error: {e.Message}",
                     AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
-                empty.Source = nameof(CompactJsonFormatParser);
+                empty.Source = nameof(EcsJsonFileParser);
                 empty.Module = "Analogy.LogViewer.Serilog";
                 parsedMessages.Add(empty);
                 messagesHandler.AppendMessages(parsedMessages, fileName);
