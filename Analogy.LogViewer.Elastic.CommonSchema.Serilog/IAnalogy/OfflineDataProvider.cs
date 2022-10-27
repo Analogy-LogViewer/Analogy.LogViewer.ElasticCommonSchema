@@ -44,10 +44,10 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
         {
             EcsJsonFileParser = new EcsJsonFileParser(new JsonFormatMessageFields());
         }
-        public override Task InitializeDataProviderAsync(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(IAnalogyLogger logger)
         {
             LogManager.Instance.SetLogger(logger);
-            return base.InitializeDataProviderAsync(logger);
+            return base.InitializeDataProvider(logger);
         }
 
         public override async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
