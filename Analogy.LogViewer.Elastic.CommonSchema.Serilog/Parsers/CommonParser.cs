@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Analogy.Interfaces;
 using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Managers;
+using Analogy.LogViewer.Template.Managers;
 using Serilog.Events;
 
 namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers

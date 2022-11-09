@@ -11,6 +11,7 @@ using Analogy.Interfaces;
 using Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes;
 using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Managers;
 using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers;
+using Analogy.LogViewer.Template.Managers;
 using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
@@ -46,7 +47,6 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
         }
         public override Task InitializeDataProvider(IAnalogyLogger logger)
         {
-            LogManager.Instance.SetLogger(logger);
             return base.InitializeDataProvider(logger);
         }
 
