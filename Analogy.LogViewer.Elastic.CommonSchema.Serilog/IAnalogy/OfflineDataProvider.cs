@@ -50,7 +50,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
             return base.InitializeDataProvider(logger);
         }
 
-        public override async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        public override async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
             {

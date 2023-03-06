@@ -118,7 +118,6 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
                     m.User = structure.ToString();
                 }
             }
-            m.AdditionalInformation = new Dictionary<string, string>();
             foreach (KeyValuePair<string, LogEventPropertyValue> property in evt.Properties)
             {
                 if (property.Key.Equals(Constants.EnvironmentUserName) ||
@@ -133,7 +132,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
                     continue;
                 }
 
-                m.AdditionalInformation.Add(property.Key, property.Value.ToString());
+                m.AddOrReplaceAdditionalProperty(property.Key, property.Value.ToString());
             }
             return m;
         }
