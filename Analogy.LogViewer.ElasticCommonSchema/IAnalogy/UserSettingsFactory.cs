@@ -9,7 +9,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
     public class UserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactory
     {
-        public override string Title { get; set; } = "Serilog User Settings";
+        public override string Title { get; set; } = "Elastic Common Schema User Settings";
         public override UserControl DataProviderSettings { get; set; }
         public override Image SmallImage { get; set; } = Resources.AnalogyECS16x16;
         public override Image LargeImage { get; set; } = Resources.AnalogyECS32x32;

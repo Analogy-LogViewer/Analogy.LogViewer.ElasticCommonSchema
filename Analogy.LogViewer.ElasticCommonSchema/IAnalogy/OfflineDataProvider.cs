@@ -9,16 +9,17 @@ using Analogy.Interfaces;
 using Analogy.LogViewer.ElasticCommonSchema.DataTypes;
 using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Analogy.LogViewer.ElasticCommonSchema.Parsers;
+using Analogy.LogViewer.ElasticCommonSchema.Properties;
 using Analogy.LogViewer.Template.Managers;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
     public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
     {
-        public override Guid Id { get; set; } = new Guid("8f5b7e86-cb90-4281-8170-4b2342104a60");
-        public override Image LargeImage { get; set; } = null;
-        public override Image SmallImage { get; set; } = null;
-        public override string OptionalTitle { get; set; } = "Serilog offline reader";
+        public override Guid Id { get; set; } = new Guid("1e3e3bb2-3130-4311-8c47-740a5f692d6d");
+        public override Image LargeImage { get; set; } = Resources.AnalogyECS32x32;
+        public override Image SmallImage { get; set; } = Resources.AnalogyECS16x16;
+        public override string OptionalTitle { get; set; } = "Elastic Common Schema parser";
         public override bool CanSaveToLogFile { get; set; } = false;
         public override string FileOpenDialogFilters { get; set; } = UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
         public override string FileSaveDialogFilters { get; set; } = string.Empty;

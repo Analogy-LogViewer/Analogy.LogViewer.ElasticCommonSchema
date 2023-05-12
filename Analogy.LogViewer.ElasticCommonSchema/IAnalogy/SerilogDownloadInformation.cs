@@ -11,7 +11,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
         public override TargetFrameworkAttribute CurrentFrameworkAttribute { get; set; } = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly().GetCustomAttribute(typeof(TargetFrameworkAttribute));
 
         public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
-        public override string Name { get; set; } = "Elastic Common Scheme Serilog Data Provider";
+        public override string Name { get; set; } = "Elastic Common Schema Data Provider";
 
         private string? _installedVersionNumber;
         public override string InstalledVersionNumber
