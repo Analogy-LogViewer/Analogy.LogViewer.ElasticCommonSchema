@@ -30,88 +30,58 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
         }
-        public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token,
-          ILogMessageCreatedHandler messagesHandler)
+        public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
-            List<IAnalogyLogMessage> parsedMessages = new List<IAnalogyLogMessage>();
+            if (string.IsNullOrEmpty(fileName))
+            {
+                AnalogyLogMessage empty = new AnalogyLogMessage($"File is null or empty. Aborting.",
+                    AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
+                {
+                    Source = "Analogy",
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                };
+                messagesHandler.AppendMessage(empty, fileName);
+                return new List<IAnalogyLogMessage> { empty };
+            }
+            List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
             try
             {
-                using (var analogy = new LoggerConfiguration()
-                    .MinimumLevel.Verbose()
-                    .WriteTo.Analogy()
-                    .CreateLogger())
+                var jsonLines = System.IO.File.ReadAllLines(fileName);
+                foreach (var line in jsonLines)
                 {
-                    using (var fileStream =
-                        new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    var entry = EcsDocument.Deserialize(line);
+                    AnalogyLogMessage message = new AnalogyLogMessage()
                     {
-
-                        if (fileName.EndsWith(".gz", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            using (var gzStream = new GZipStream(fileStream, CompressionMode.Decompress))
-                            {
-                                using (var streamReader = new StreamReader(gzStream, encoding: Encoding.UTF8))
-                                {
-                                    string json;
-                                    long count = 0;
-                                    while ((json = await streamReader.ReadLineAsync()) != null)
-                                    {
-
-                                        var data = JsonConvert.DeserializeObject(json, JsonSerializerSettings);
-                                        var jo = data as JObject;
-                                        var evt = LogEventReader.ReadFromJObject(jo, messageFields);
-                                        {
-                                            analogy.Write(evt);
-                                            AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
-                                            m.RawText = jo.ToString(Formatting.None);
-                                            m.RawTextType = AnalogyRowTextType.JSON;
-                                            parsedMessages.Add(m);
-                                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
-
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
+                        Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
+                        Level = AnalogyLogMessage.ParseLogLevelFromString(entry.Log.Level),
+                        RawText = line,
+                        RawTextType = AnalogyRowTextType.JSON,
+                        Text = entry.Message,
+                        MachineName = entry.Host?.Hostname ?? "",
+                        ProcessId = (int)(entry.Process?.Pid ?? 0),
+                        LineNumber = (int)(entry.Log?.OriginFileLine ?? 0),
+                        MethodName = entry.Log?.OriginFunction ?? "",
+                        FileName = entry.Log?.OriginFileName ?? "",
 
 
-                        using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
-                        {
-                            string json;
-                            long count = 0;
-                            while ((json = await streamReader.ReadLineAsync()) != null)
-                            {
-                                var data = JsonConvert.DeserializeObject(json, JsonSerializerSettings);
-                                var jo = data as JObject;
-                                var evt = LogEventReader.ReadFromJObject(jo, messageFields);
-                                {
-                                    analogy.Write(evt);
-                                    AnalogyLogMessage m = CommonParser.ParseLogEventProperties(evt);
-                                    m.RawText = jo.ToString(Formatting.None);
-                                    m.RawTextType = AnalogyRowTextType.JSON;
-                                    parsedMessages.Add(m);
-                                    count++;
-                                    messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Incremental, 1, count, count));
+                    };
+                    messages.Add(message);
+                    messagesHandler.AppendMessage(message, fileName);
 
-                                }
-                            }
-                        }
-
-                    }
-
-                    messagesHandler.AppendMessages(parsedMessages, fileName);
-                    return parsedMessages;
                 }
+                return messages;
             }
             catch (Exception e)
             {
-                AnalogyLogMessage empty = new AnalogyLogMessage($"Error reading file {fileName}: Error: {e.Message}",
-                    AnalogyLogLevel.Error, AnalogyLogClass.General, "Analogy", "None");
-                empty.Source = nameof(EcsJsonFileParser);
-                empty.Module = "Analogy.LogViewer.Serilog";
-                parsedMessages.Add(empty);
-                messagesHandler.AppendMessages(parsedMessages, fileName);
-                return parsedMessages;
+                AnalogyLogMessage empty = new AnalogyLogMessage($"Error occurred processing file {fileName}. Reason: {e.Message}",
+                    AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
+                {
+                    Source = "Analogy",
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                };
+                messagesHandler.AppendMessage(empty, fileName);
+                return new List<AnalogyLogMessage> { empty
+    };
             }
         }
     }

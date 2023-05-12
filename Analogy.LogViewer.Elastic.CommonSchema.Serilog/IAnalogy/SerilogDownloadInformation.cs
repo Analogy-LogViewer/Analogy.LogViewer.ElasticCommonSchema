@@ -7,11 +7,11 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
 {
     public class SerilogDownloadInformation : Analogy.LogViewer.Template.AnalogyDownloadInformation
     {
-        protected override string RepositoryURL { get; set; } = "https://api.github.com/repos/Analogy-LogViewer/Analogy.LogViewer.Serilog";
+        protected override string RepositoryURL { get; set; } = "https://api.github.com/repos/Analogy-LogViewer/Analogy.LogViewer.Elastic.CommonSchema.Serilog";
         public override TargetFrameworkAttribute CurrentFrameworkAttribute { get; set; } = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly().GetCustomAttribute(typeof(TargetFrameworkAttribute));
 
         public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
-        public override string Name { get; set; } = "Serilog Data Provider";
+        public override string Name { get; set; } = "Elastic Common Scheme Serilog Data Provider";
 
         private string? _installedVersionNumber;
         public override string InstalledVersionNumber
