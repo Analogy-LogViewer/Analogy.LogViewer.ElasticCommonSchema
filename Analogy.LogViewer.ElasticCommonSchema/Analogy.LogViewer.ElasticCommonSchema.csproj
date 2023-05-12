@@ -4,7 +4,7 @@
 		<OutputType>Library</OutputType>
 		<TargetFrameworks>net7.0-windows;net6.0-windows;net48;net471</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
-		<PackageId>Analogy.LogViewer.Elastic.CommonSchema.Serilog</PackageId>
+		<PackageId>Analogy.LogViewer.ElasticCommonSchema</PackageId>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -13,13 +13,13 @@
 		<ApplicationIcon />
 		<StartupObject />
 		<Authors>Lior Banai</Authors>
-		<Description>Analogy Serilog Parser for Elastic Common Schema (ECS)</Description>
+		<Description>Elastic Common Schema (ECS) parser (Serilog,NLog, Log4Net)</Description>
 		<Copyright>Lior Banai © 2023</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Elastic.CommonSchema.Serilog</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.Elastic.CommonSchema.Serilog</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>Analogy Serilog Parsers</PackageReleaseNotes>
+		<PackageReleaseNotes></PackageReleaseNotes>
 		<PackageIcon>AnalogySerilog.png</PackageIcon>
 		<PackageIconUrl />
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>

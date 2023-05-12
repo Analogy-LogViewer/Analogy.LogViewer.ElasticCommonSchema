@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Analogy.LogViewer.Elastic.CommonSchema.Serilog\Analogy.LogViewer.Elastic.CommonSchema.Serilog.csproj" />
+    <ProjectReference Include="..\Analogy.LogViewer.ElasticCommonSchema\Analogy.LogViewer.ElasticCommonSchema.csproj" />
   </ItemGroup>
 
   <ItemGroup>
