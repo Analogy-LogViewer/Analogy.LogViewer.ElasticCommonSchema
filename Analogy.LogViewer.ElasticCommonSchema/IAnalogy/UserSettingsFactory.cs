@@ -3,18 +3,18 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Analogy.Interfaces;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties;
+using Analogy.LogViewer.ElasticCommonSchema.Properties;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
+namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
     public class UserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactory
     {
         public override string Title { get; set; } = "Serilog User Settings";
         public override UserControl DataProviderSettings { get; set; }
-        public override Image SmallImage { get; set; } = Resources.AnalogySerilog16x16;
-        public override Image LargeImage { get; set; } = Resources.AnalogySerilog32x32;
+        public override Image SmallImage { get; set; } = Resources.AnalogyECS16x16;
+        public override Image LargeImage { get; set; } = Resources.AnalogyECS32x32;
         public override Guid FactoryId { get; set; } = PrimaryFactory.Id;
-        public override Guid Id { get; set; } = new Guid("26FF0D4D-8FA8-46C6-A021-079E669E7EC6");
+        public override Guid Id { get; set; } = new Guid("498f5f6f-08f7-41b0-98ae-cc30ca687074");
 
         public override void CreateUserControl(IAnalogyLogger logger)
         {

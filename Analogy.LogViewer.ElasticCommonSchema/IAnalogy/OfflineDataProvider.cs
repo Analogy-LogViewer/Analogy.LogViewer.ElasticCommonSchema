@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Managers;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers;
+using Analogy.LogViewer.ElasticCommonSchema.DataTypes;
+using Analogy.LogViewer.ElasticCommonSchema.Managers;
+using Analogy.LogViewer.ElasticCommonSchema.Parsers;
 using Analogy.LogViewer.Template.Managers;
-using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
+namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
     public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
     {

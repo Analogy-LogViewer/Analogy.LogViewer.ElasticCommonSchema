@@ -4,7 +4,7 @@ using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Managers
+namespace Analogy.LogViewer.ElasticCommonSchema.Managers
 {
     public class UserSettingsManager
     {

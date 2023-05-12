@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Managers;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties;
+using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
+namespace Analogy.LogViewer.ElasticCommonSchema
 {
     public partial class SerilogUCSettings : UserControl
     {

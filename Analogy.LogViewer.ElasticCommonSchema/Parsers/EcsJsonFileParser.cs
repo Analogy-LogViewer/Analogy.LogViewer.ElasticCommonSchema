@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes;
+using Analogy.LogViewer.ElasticCommonSchema.DataTypes;
 using Elastic.CommonSchema;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Serilog;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
+namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 {
     public class EcsJsonFileParser
     {

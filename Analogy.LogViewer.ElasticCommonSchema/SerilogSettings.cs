@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
+namespace Analogy.LogViewer.ElasticCommonSchema
 {
 
     public class SerilogSettings

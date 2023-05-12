@@ -17,7 +17,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Serilog.Events;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes
+namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 {
     static class PropertyFactory
     {

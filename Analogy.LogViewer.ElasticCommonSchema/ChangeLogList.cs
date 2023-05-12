@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Analogy.Interfaces;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
+namespace Analogy.LogViewer.ElasticCommonSchema
 {
     public static class ChangeLogList
     {

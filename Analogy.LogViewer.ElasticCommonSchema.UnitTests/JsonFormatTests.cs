@@ -3,9 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.UnitTests

@@ -1,4 +1,4 @@
-﻿namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
+﻿namespace Analogy.LogViewer.ElasticCommonSchema
 {
     partial class SerilogUCSettings
     {

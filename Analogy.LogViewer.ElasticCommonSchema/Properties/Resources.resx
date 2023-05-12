@@ -118,14 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AnalogySerilog" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AnalogySerilog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnalogyECS128x128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalogyECS128x128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AnalogySerilog16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AnalogySerilog16x16.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnalogyECS16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalogyECS16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AnalogySerilog32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AnalogySerilog32x32.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnalogyECS256x256" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalogyECS256x256.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalogyECS32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalogyECS32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnalogyECS64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnalogyECS64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CompactJsonFormatPerFile" xml:space="preserve">
     <value>[
@@ -265,11 +271,5 @@
   <data name="JsonFormatPerLine" xml:space="preserve">
     <value>{"Timestamp":"2020-06-07T13:44:57.8532799+10:00","Level":"Information","MessageTemplate":"Hello, {@User}, {N:x8} at {Now}","Properties":{"User":{"Name":"nblumhardt","Tags":[1,2,3]},"N":123,"Now":"2016-06-07T13:44:57.8532799+10:00"},"Renderings":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}
 {"Timestamp":"2016-06-07T13:44:57.8532799+10:00","Level":"Information","MessageTemplate":"Hello, {@User}, {N:x8} at {Now}","Properties":{"User":{"Name":"Lior","Tags":[1,2,3]},"N":123,"Now":"2016-06-07T13:44:57.8532799+10:00"},"Renderings":{"N":[{"Format":"x8","Rendering":"0000007b"}]}}</value>
-  </data>
-  <data name="Serilog_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Serilog_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Serilog_icon32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Serilog_icon32x32.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

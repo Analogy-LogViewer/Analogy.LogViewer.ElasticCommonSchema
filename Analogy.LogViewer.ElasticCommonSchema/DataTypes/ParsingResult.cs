@@ -1,6 +1,6 @@
 ﻿using Serilog.Events;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes
+namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 {
     public class ParsingResult
     {

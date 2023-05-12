@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Serilog.Events;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes
+namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 {
     class RenderableScalarValue : ScalarValue
     {

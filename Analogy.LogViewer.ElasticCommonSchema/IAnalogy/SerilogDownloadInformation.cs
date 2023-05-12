@@ -3,11 +3,11 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Versioning;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.IAnalogy
+namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
     public class SerilogDownloadInformation : Analogy.LogViewer.Template.AnalogyDownloadInformation
     {
-        protected override string RepositoryURL { get; set; } = "https://api.github.com/repos/Analogy-LogViewer/Analogy.LogViewer.Elastic.CommonSchema.Serilog";
+        protected override string RepositoryURL { get; set; } = "https://api.github.com/repos/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema";
         public override TargetFrameworkAttribute CurrentFrameworkAttribute { get; set; } = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly().GetCustomAttribute(typeof(TargetFrameworkAttribute));
 
         public override Guid FactoryId { get; set; } = PrimaryFactory.Id;

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Analogy.Interfaces;
-using Analogy.LogViewer.Elastic.CommonSchema.Serilog.Managers;
+using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Analogy.LogViewer.Template.Managers;
 using Serilog.Events;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Parsers
+namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 {
     public static class CommonParser
     {

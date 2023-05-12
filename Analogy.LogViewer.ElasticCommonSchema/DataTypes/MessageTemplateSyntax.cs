@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes
+namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 {
     static class MessageTemplateSyntax
     {

@@ -20,8 +20,8 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: Analogy.LogViewer.Elastic.CommonSchema.Serilog.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: Analogy.LogViewer.Elastic.CommonSchema.Serilog.UnitTests\Analogy.LogViewer.Elastic.CommonSchema.Serilog.UnitTests.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Solution_Name: Analogy.LogViewer.ElasticCommonSchema.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
+      Test_Project_Path: Analogy.LogViewer.ElasticCommonSchema.UnitTests\Analogy.LogViewer.ElasticCommonSchema.UnitTests.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
      
     steps:
     - name: Checkout
@@ -59,7 +59,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
        name: 'artifactory'
-       path: ./Analogy.LogViewer.Elastic.CommonSchema.Serilog/bin/${{ matrix.configuration }}
+       path: ./Analogy.LogViewer.ElasticCommonSchema/bin/${{ matrix.configuration }}
         
   push-nuget:
     name: 'Push NuGet Packages'

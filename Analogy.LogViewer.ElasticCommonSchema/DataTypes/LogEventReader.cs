@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using Serilog.Events;
 using Serilog.Parsing;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.DataTypes
+namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 {
     /// <summary>
     /// Reads files produced by <em>Serilog.Formatting.Compact.CompactJsonFormatter</em>. Events

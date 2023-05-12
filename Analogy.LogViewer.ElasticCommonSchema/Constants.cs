@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
+namespace Analogy.LogViewer.ElasticCommonSchema
 {
     public static class Constants
     {

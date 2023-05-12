@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties {
+namespace Analogy.LogViewer.ElasticCommonSchema.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Analogy.LogViewer.ElasticCommonSchema.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AnalogySerilog {
+        internal static System.Drawing.Bitmap AnalogyECS128x128 {
             get {
-                object obj = ResourceManager.GetObject("AnalogySerilog", resourceCulture);
+                object obj = ResourceManager.GetObject("AnalogyECS128x128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AnalogySerilog16x16 {
+        internal static System.Drawing.Bitmap AnalogyECS16x16 {
             get {
-                object obj = ResourceManager.GetObject("AnalogySerilog16x16", resourceCulture);
+                object obj = ResourceManager.GetObject("AnalogyECS16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,29 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AnalogySerilog32x32 {
+        internal static System.Drawing.Bitmap AnalogyECS256x256 {
             get {
-                object obj = ResourceManager.GetObject("AnalogySerilog32x32", resourceCulture);
+                object obj = ResourceManager.GetObject("AnalogyECS256x256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AnalogyECS32x32 {
+            get {
+                object obj = ResourceManager.GetObject("AnalogyECS32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AnalogyECS64x64 {
+            get {
+                object obj = ResourceManager.GetObject("AnalogyECS64x64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -169,26 +189,6 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.Properties {
         internal static string JsonFormatPerLine {
             get {
                 return ResourceManager.GetString("JsonFormatPerLine", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Serilog_icon {
-            get {
-                object obj = ResourceManager.GetObject("Serilog_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Serilog_icon32x32 {
-            get {
-                object obj = ResourceManager.GetObject("Serilog_icon32x32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

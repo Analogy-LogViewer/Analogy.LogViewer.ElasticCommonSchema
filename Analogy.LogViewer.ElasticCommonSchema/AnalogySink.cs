@@ -8,7 +8,7 @@ using Serilog.Formatting;
 using Serilog.Formatting.Display;
 using Serilog.Formatting.Json;
 
-namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog
+namespace Analogy.LogViewer.ElasticCommonSchema
 {
     class AnalogySink : ILogEventSink
     {
