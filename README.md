@@ -10,7 +10,7 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema/blob/master/LICENSE.md">
     <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema" img alt="License"/>
 </a>
- [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.Elastic.CommonSchema.Serilog)](https://www.nuget.org/packages/Analogy.LogViewer.Elastic.CommonSchema.Serilog/)
+ [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.ElasticCommonSchema)](https://www.nuget.org/packages/Analogy.LogViewer.ElasticCommonSchema/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema/releases">
     <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema" img alt="Latest Release"/>
 </a>
