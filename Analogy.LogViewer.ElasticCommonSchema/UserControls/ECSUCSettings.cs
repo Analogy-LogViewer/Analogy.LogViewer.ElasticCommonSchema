@@ -8,10 +8,10 @@ using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.ElasticCommonSchema
 {
-    public partial class SerilogUCSettings : UserControl
+    public partial class ECSUCSettings : UserControl
     {
         private SerilogSettings Settings => UserSettingsManager.UserSettings.Settings;
-        public SerilogUCSettings()
+        public ECSUCSettings()
         {
             InitializeComponent();
         }
@@ -22,7 +22,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema
         }
         public void SaveSettings()
         {
-#if NETCOREAPP3_1 || NET
+#if  NET
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(";", StringSplitOptions.RemoveEmptyEntries).ToList();
 #else
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -31,8 +31,8 @@ namespace Analogy.LogViewer.ElasticCommonSchema
             Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
             Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             Settings.IgnoredAttributes = lstbIgnoreColumn.Items.Count > 0 ? lstbIgnoreColumn.Items.Cast<string>().ToList() : new List<string>();
-            
-        
+
+
             Settings.UseApplicationFolderForSettings = rbtnApplicationFolder.Checked;
             UserSettingsManager.UserSettings.Save();
         }
@@ -102,7 +102,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema
             txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
             lstbIgnoreColumn.Items.Clear();
             lstbIgnoreColumn.Items.AddRange(logSettings.IgnoredAttributes.ToArray());
-      
+
         }
 
         private void btnOpenFolder_Click(object sender, EventArgs e)
