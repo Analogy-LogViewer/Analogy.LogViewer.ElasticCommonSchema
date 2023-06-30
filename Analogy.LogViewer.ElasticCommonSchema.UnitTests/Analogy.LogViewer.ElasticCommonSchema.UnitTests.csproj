@@ -1,51 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFrameworks>net471;net472;net6.0-windows</TargetFrameworks>
-	  <IsPackable>false</IsPackable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net471;net472;net6.0-windows</TargetFrameworks>
+		<IsPackable>false</IsPackable>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.8.3" />
-    <PackageReference Include="Elastic.CommonSchema.Serilog" Version="8.6.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.0.4" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.0.4" />
-    <PackageReference Include="coverlet.collector" Version="6.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="3.8.3" />
+		<PackageReference Include="Elastic.CommonSchema.Serilog" Version="8.6.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.0.4" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.0.4" />
+		<PackageReference Include="coverlet.collector" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Analogy.LogViewer.ElasticCommonSchema\Analogy.LogViewer.ElasticCommonSchema.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Analogy.LogViewer.ElasticCommonSchema\Analogy.LogViewer.ElasticCommonSchema.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="log files\Analogy.Logserver.20200913.log">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="log files\CompactJsonFormat.clef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="log files\CompactJsonFormat.gz">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="log files\JsonFormatPerFile.clef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="log files\JsonFormatPerLine.clef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="log files\CompactJsonFormatSourceContextTest.clef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="log files\CompactJsonFormatTestColumns.clef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="log files\JsonFileCompactFormat.clef">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="log files\Analogy.Logserver.20200913.log">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="log files\CompactJsonFormat.clef">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="log files\CompactJsonFormat.gz">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="log files\JsonFormatPerFile.clef">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="log files\JsonFormatPerLine.clef">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="log files\CompactJsonFormatSourceContextTest.clef">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="log files\CompactJsonFormatTestColumns.clef">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="log files\JsonFileCompactFormat.clef">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
