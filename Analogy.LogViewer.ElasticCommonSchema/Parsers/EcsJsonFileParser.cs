@@ -40,25 +40,14 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
             List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
             try
             {
+#if NET
+                var jsonLines = await System.IO.File.ReadAllLinesAsync(fileName, token);
+#else
                 var jsonLines = System.IO.File.ReadAllLines(fileName);
+#endif
                 foreach (var line in jsonLines)
                 {
-                    var entry = EcsDocument.Deserialize(line);
-                    AnalogyLogMessage message = new AnalogyLogMessage()
-                    {
-                        Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
-                        Level = AnalogyLogMessage.ParseLogLevelFromString(entry.Log.Level),
-                        RawText = line,
-                        RawTextType = AnalogyRowTextType.JSON,
-                        Text = entry.Message,
-                        MachineName = entry.Host?.Hostname ?? "",
-                        ProcessId = (int)(entry.Process?.Pid ?? 0),
-                        LineNumber = (int)(entry.Log?.OriginFileLine ?? 0),
-                        MethodName = entry.Log?.OriginFunction ?? "",
-                        FileName = entry.Log?.OriginFileName ?? "",
-
-
-                    };
+                    var message = Parseline(line);
                     messages.Add(message);
                     messagesHandler.AppendMessage(message, fileName);
 
@@ -77,6 +66,25 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 return new List<AnalogyLogMessage> { empty
     };
             }
+        }
+
+        public static IAnalogyLogMessage Parseline(string line)
+        {
+            var entry = EcsDocument.Deserialize(line);
+            AnalogyLogMessage message = new AnalogyLogMessage()
+            {
+                Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
+                Level = AnalogyLogMessage.ParseLogLevelFromString(entry.Log.Level),
+                RawText = line,
+                RawTextType = AnalogyRowTextType.JSON,
+                Text = entry.Message ?? "",
+                MachineName = entry.Host?.Hostname ?? "",
+                ProcessId = (int)(entry.Process?.Pid ?? 0),
+                LineNumber = (int)(entry.Log?.OriginFileLine ?? 0),
+                MethodName = entry.Log?.OriginFunction ?? "",
+                FileName = entry.Log?.OriginFileName ?? "",
+            };
+            return message;
         }
     }
 }
