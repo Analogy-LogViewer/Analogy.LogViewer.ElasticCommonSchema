@@ -18,7 +18,10 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 }
                 return ecsDocument.Message ?? "";
             }
-            var entry = EcsDocument.Deserialize(line);
+
+            try
+            {
+                var entry = EcsDocument.Deserialize(line);
             AnalogyLogMessage message = new()
             {
                 Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
@@ -68,6 +71,13 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
             //}
 
             return message;
+            }
+            catch (Exception e)
+            {
+                AnalogyErrorMessage aem = new($"Error parsing line: {line}. Error: {e.Message}", line,
+                    AnalogyRowTextType.PlainText);
+                return aem;
+            }
         }
     }
 }
