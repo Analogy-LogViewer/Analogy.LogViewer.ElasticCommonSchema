@@ -27,18 +27,23 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 Text = GetMessage(entry),
                 MachineName = entry.Host?.Hostname ?? "",
                 ProcessId = (int)(entry.Process?.Pid ?? 0),
+                ThreadId = (int)(entry.Process?.ThreadId ?? 0),
                 LineNumber = (int)(entry.Log?.OriginFileLine ?? 0),
                 MethodName = entry.Log?.OriginFunction ?? "",
                 FileName = entry.Log?.OriginFileName ?? "",
                 User = entry.User?.Name ?? "Unknown",
             };
-            if (entry.Error?.Message != null)
+            if (entry.Error?.Message is not null)
             {
-                message.AddOrReplaceAdditionalProperty("Error",entry.Error.Message);
+                message.AddOrReplaceAdditionalProperty("Error", entry.Error.Message);
             }
-            if (entry.Error?.StackTrace != null)
+            if (entry.Error?.StackTrace is not null)
             {
                 message.AddOrReplaceAdditionalProperty("StackTrace", entry.Error.StackTrace);
+            }
+            if (entry.Log?.Logger is not null)
+            {
+                message.AddOrReplaceAdditionalProperty("Logger", entry.Log.Logger);
             }
             return message;
         }
