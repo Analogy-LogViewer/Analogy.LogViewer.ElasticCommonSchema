@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Elastic.CommonSchema;
 using System;
+using System.Collections.Generic;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 {
@@ -31,7 +32,9 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 LineNumber = (int)(entry.Log?.OriginFileLine ?? 0),
                 MethodName = entry.Log?.OriginFunction ?? "",
                 FileName = entry.Log?.OriginFileName ?? "",
-                User = entry.User?.Name ?? "Unknown",
+                Module = entry.Process?.Name ?? string.Empty,
+                Source = entry.Log?.Logger ?? string.Empty,
+                User = entry.User?.Name ?? "",
             };
             if (entry.Error?.Message is not null)
             {
@@ -45,6 +48,25 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
             {
                 message.AddOrReplaceAdditionalProperty("Logger", entry.Log.Logger);
             }
+
+            //if (entry.Labels is not null)
+            //{
+            //    foreach (KeyValuePair<string, string> label in entry.Labels)
+            //    {
+            //        message.AddOrReplaceAdditionalProperty(label.Key, label.Value);
+            //    }
+            //}
+            //if (entry.Metadata is not null)
+            //{
+            //    foreach (KeyValuePair<string, object?> md in entry.Metadata)
+            //    {
+            //        if (md.Value is not null)
+            //        {
+            //            message.AddOrReplaceAdditionalProperty(md.Key, md.Value.ToString());
+            //        }
+            //    }
+            //}
+
             return message;
         }
     }
