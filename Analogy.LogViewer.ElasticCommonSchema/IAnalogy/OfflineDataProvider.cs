@@ -11,6 +11,7 @@ using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Analogy.LogViewer.ElasticCommonSchema.Parsers;
 using Analogy.LogViewer.ElasticCommonSchema.Properties;
 using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
@@ -20,11 +21,11 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
         public override Image LargeImage { get; set; } = Resources.AnalogyECS32x32;
         public override Image SmallImage { get; set; } = Resources.AnalogyECS16x16;
         public override string OptionalTitle { get; set; } = "Elastic Common Schema parser";
-        public override bool CanSaveToLogFile { get; set; } = false;
+        public override bool CanSaveToLogFile { get; set; }
         public override string FileOpenDialogFilters { get; set; } = UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
         public override string FileSaveDialogFilters { get; set; } = string.Empty;
         public override IEnumerable<string> SupportFormats { get; set; } = UserSettingsManager.UserSettings.Settings.SupportFormats;
-        public override bool DisableFilePoolingOption { get; set; } = false;
+        public override bool DisableFilePoolingOption { get; set; }
 
         public override string InitialFolderFullPath =>
             (!string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.Directory) &&
@@ -33,7 +34,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
                 : Environment.CurrentDirectory;
         private EcsJsonFileParser EcsJsonFileParser { get; }
 
-        public override bool UseCustomColors { get; set; } = false;
+        public override bool UseCustomColors { get; set; }
         public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
@@ -43,7 +44,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
         {
             EcsJsonFileParser = new EcsJsonFileParser(new JsonFormatMessageFields());
         }
-        public override Task InitializeDataProvider(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(ILogger logger)
         {
             return base.InitializeDataProvider(logger);
         }

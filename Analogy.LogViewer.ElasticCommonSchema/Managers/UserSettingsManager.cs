@@ -105,7 +105,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Managers
             }
             catch (Exception e)
             {
-                LogManager.Instance.LogException("Error saving settings: " + e.Message, e, "Analogy Serilog Parser");
+                LogManager.Instance.LogError(e, "Error saving settings: " + e.Message);
             }
 
 
