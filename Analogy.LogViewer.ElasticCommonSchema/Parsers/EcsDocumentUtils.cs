@@ -7,7 +7,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 {
     public static class EcsDocumentUtils
     {
-        public static IAnalogyLogMessage ParseLine(string line)
+        public static IAnalogyLogMessage ParseLine(string line,bool addAllMetadataFields, List<string> addSpecificMetadataFields)
         {
             string GetMessage(EcsDocument ecsDocument)
             {
@@ -52,25 +52,25 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 message.AddOrReplaceAdditionalProperty("Logger", entry.Log.Logger);
             }
 
-            //if (entry.Labels is not null)
-            //{
-            //    foreach (KeyValuePair<string, string> label in entry.Labels)
-            //    {
-            //        message.AddOrReplaceAdditionalProperty(label.Key, label.Value);
-            //    }
-            //}
-            //if (entry.Metadata is not null)
-            //{
-            //    foreach (KeyValuePair<string, object?> md in entry.Metadata)
-            //    {
-            //        if (md.Value is not null)
-            //        {
-            //            message.AddOrReplaceAdditionalProperty(md.Key, md.Value.ToString());
-            //        }
-            //    }
-            //}
+                //if (entry.Labels is not null)
+                //{
+                //    foreach (KeyValuePair<string, string> label in entry.Labels)
+                //    {
+                //        message.AddOrReplaceAdditionalProperty(label.Key, label.Value);
+                //    }
+                //}
+                if (entry.Metadata is not null)
+                {
+                    foreach (KeyValuePair<string, object?> md in entry.Metadata)
+                    {
+                        if (md.Value is not null && (addAllMetadataFields || addSpecificMetadataFields.Contains(md.Key)))
+                        {
+                            message.AddOrReplaceAdditionalProperty(md.Key, md.Value.ToString());
+                        }
+                    }
+                }
 
-            return message;
+                return message;
             }
             catch (Exception e)
             {

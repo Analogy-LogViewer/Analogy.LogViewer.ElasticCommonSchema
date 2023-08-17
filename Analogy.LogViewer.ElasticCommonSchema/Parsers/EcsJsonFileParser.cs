@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
 using Analogy.LogViewer.ElasticCommonSchema.DataTypes;
+using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Elastic.CommonSchema;
 using Newtonsoft.Json;
 
@@ -49,7 +50,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 #endif
                 foreach (var line in jsonLines)
                 {
-                    var message = EcsDocumentUtils.ParseLine(line);
+                    var message = EcsDocumentUtils.ParseLine(line, UserSettingsManager.UserSettings.Settings.ShowAllColumnsFromMetaDataField, UserSettingsManager.UserSettings.Settings.AdditionalColumnsFromMetaDataField);
                     messages.Add(message);
                     messagesHandler.AppendMessage(message, fileName);
                 }

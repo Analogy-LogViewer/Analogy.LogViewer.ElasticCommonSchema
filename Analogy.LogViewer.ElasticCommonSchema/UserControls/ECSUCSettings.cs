@@ -10,7 +10,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema
 {
     public partial class ECSUCSettings : UserControl
     {
-        private SerilogSettings Settings => UserSettingsManager.UserSettings.Settings;
+        private ECSSettings Settings => UserSettingsManager.UserSettings.Settings;
         public ECSUCSettings()
         {
             InitializeComponent();
@@ -22,18 +22,8 @@ namespace Analogy.LogViewer.ElasticCommonSchema
         }
         public void SaveSettings()
         {
-#if  NET
-            Settings.SupportFormats = txtbSupportedFiles.Text.Split(";", StringSplitOptions.RemoveEmptyEntries).ToList();
-#else
-            Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-#endif
-            Settings.Directory = txtbDirectory.Text;
-            Settings.FileOpenDialogFilters = txtbOpenFileFilters.Text;
-            Settings.SupportFormats = txtbSupportedFiles.Text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            Settings.IgnoredAttributes = lstbIgnoreColumn.Items.Count > 0 ? lstbIgnoreColumn.Items.Cast<string>().ToList() : new List<string>();
-
-
-            Settings.UseApplicationFolderForSettings = rbtnApplicationFolder.Checked;
+            Settings.ShowAllColumnsFromMetaDataField = cbShowAllMetadataFields.Checked;
+            Settings.AdditionalColumnsFromMetaDataField = lstbAdditionalColumn.Items.Count > 0 ? lstbAdditionalColumn.Items.Cast<string>().ToList() : new List<string>();
             UserSettingsManager.UserSettings.Save();
         }
 
@@ -73,7 +63,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema
                 try
                 {
                     var json = File.ReadAllText(openFileDialog1.FileName);
-                    SerilogSettings settings = JsonConvert.DeserializeObject<SerilogSettings>(json);
+                    ECSSettings settings = JsonConvert.DeserializeObject<ECSSettings>(json);
                     LoadSettings(settings);
                     MessageBox.Show("File Imported. Save settings if desired", @"Import settings", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -87,58 +77,18 @@ namespace Analogy.LogViewer.ElasticCommonSchema
             }
         }
 
-        private void LoadSettings(SerilogSettings logSettings)
+        private void LoadSettings(ECSSettings logSettings)
         {
-            if (Settings.UseApplicationFolderForSettings)
-            {
-                rbtnApplicationFolder.Checked = true;
-            }
-            else
-            {
-                rbtnPerUser.Checked = true;
-            }
-            txtbDirectory.Text = logSettings.Directory;
-            txtbOpenFileFilters.Text = logSettings.FileOpenDialogFilters;
-            txtbSupportedFiles.Text = string.Join(";", logSettings.SupportFormats.ToList());
-            lstbIgnoreColumn.Items.Clear();
-            lstbIgnoreColumn.Items.AddRange(logSettings.IgnoredAttributes.ToArray());
 
-        }
+            cbShowAllMetadataFields.Checked = logSettings.ShowAllColumnsFromMetaDataField;
+            lstbAdditionalColumn.Items.Clear();
+            lstbAdditionalColumn.Items.AddRange(logSettings.AdditionalColumnsFromMetaDataField.ToArray());
 
-        private void btnOpenFolder_Click(object sender, EventArgs e)
-        {
-            using (var fbd = new FolderBrowserDialog())
-            {
-                DialogResult result = fbd.ShowDialog();
-
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                {
-                    txtbDirectory.Text = fbd.SelectedPath;
-                }
-            }
         }
 
         private void SerilogUCSettings_Load(object sender, EventArgs e)
         {
             LoadSettings(UserSettingsManager.UserSettings.Settings);
-        }
-
-        private void btnTestFilter_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenFileDialog openFileDialog1 = new OpenFileDialog
-                {
-                    Filter = txtbOpenFileFilters.Text,
-                    Title = @"Test Open Files",
-                    Multiselect = true
-                };
-                openFileDialog1.ShowDialog(this);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show($"Incorrect filter: {exception.Message}", "Invalid filter text", MessageBoxButtons.OK);
-            }
         }
 
         private void btnIgnoreColumn_Click(object sender, EventArgs e)
@@ -148,14 +98,14 @@ namespace Analogy.LogViewer.ElasticCommonSchema
                 return;
             }
 
-            lstbIgnoreColumn.Items.Add(txtbIgnoreColumn.Text);
+            lstbAdditionalColumn.Items.Add(txtbIgnoreColumn.Text);
         }
 
         private void btnDeleteIgnoreColumn_Click(object sender, EventArgs e)
         {
-            if (lstbIgnoreColumn.SelectedItem is string ignore)
+            if (lstbAdditionalColumn.SelectedItem is string ignore)
             {
-                lstbIgnoreColumn.Items.Remove(lstbIgnoreColumn.SelectedItem);
+                lstbAdditionalColumn.Items.Remove(lstbAdditionalColumn.SelectedItem);
             }
         }
     }

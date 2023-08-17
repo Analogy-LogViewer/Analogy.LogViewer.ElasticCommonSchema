@@ -27,11 +27,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
         public override IEnumerable<string> SupportFormats { get; set; } = UserSettingsManager.UserSettings.Settings.SupportFormats;
         public override bool DisableFilePoolingOption { get; set; }
 
-        public override string InitialFolderFullPath =>
-            (!string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.Directory) &&
-             Directory.Exists(UserSettingsManager.UserSettings.Settings.Directory))
-                ? UserSettingsManager.UserSettings.Settings.Directory
-                : Environment.CurrentDirectory;
+        public override string InitialFolderFullPath => Environment.CurrentDirectory;
         private EcsJsonFileParser EcsJsonFileParser { get; }
 
         public override bool UseCustomColors { get; set; }
