@@ -1,4 +1,4 @@
-﻿namespace Analogy.LogViewer.ElasticCommonSchema
+﻿namespace Analogy.LogViewer.ElasticCommonSchema.UserControls
 {
     partial class ECSUCSettings
     {

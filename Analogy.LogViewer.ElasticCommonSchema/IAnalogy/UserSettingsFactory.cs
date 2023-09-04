@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Analogy.Interfaces;
 using Analogy.LogViewer.ElasticCommonSchema.Properties;
+using Analogy.LogViewer.ElasticCommonSchema.UserControls;
 using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy

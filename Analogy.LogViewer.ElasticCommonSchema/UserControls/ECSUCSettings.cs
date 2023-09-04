@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Analogy.LogViewer.ElasticCommonSchema.Managers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Analogy.LogViewer.ElasticCommonSchema.Managers;
-using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.ElasticCommonSchema
+namespace Analogy.LogViewer.ElasticCommonSchema.UserControls
 {
     public partial class ECSUCSettings : UserControl
     {
