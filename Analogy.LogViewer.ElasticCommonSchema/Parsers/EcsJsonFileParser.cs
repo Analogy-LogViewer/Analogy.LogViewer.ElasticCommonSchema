@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.LogViewer.ElasticCommonSchema.DataTypes;
 using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Elastic.CommonSchema;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 {
@@ -34,7 +34,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 AnalogyLogMessage empty = new AnalogyLogMessage($"File is null or empty. Aborting.",
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
-                    Source = "Analogy", Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Source = "Analogy", Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, fileName);
                 return new List<IAnalogyLogMessage> { empty };
@@ -62,7 +62,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                     $"Error occurred processing file {fileName}. Reason: {e.Message}",
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
-                    Source = "Analogy", Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Source = "Analogy", Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, fileName);
                 return new List<AnalogyLogMessage> { empty };

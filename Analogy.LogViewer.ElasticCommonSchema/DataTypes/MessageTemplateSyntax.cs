@@ -2,7 +2,7 @@
 
 namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 {
-    static class MessageTemplateSyntax
+    public static class MessageTemplateSyntax
     {
         public static string Escape(string text)
         {

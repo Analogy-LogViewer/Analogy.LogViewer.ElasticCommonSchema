@@ -1,7 +1,7 @@
 ﻿
 namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 {
-    class Rendering
+    public class Rendering
     {
         public string Name { get; }
         public string Format { get; }

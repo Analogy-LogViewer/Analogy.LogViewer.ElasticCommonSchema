@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.LogViewer.ElasticCommonSchema.DataTypes;
 using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Analogy.LogViewer.ElasticCommonSchema.Parsers;
 using Analogy.LogViewer.ElasticCommonSchema.Properties;
 using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
@@ -31,10 +31,10 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
         private EcsJsonFileParser EcsJsonFileParser { get; }
 
         public override bool UseCustomColors { get; set; }
-        public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
-        public override (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
         public OfflineDataProvider()
         {

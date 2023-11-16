@@ -1,11 +1,11 @@
-﻿using System;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.LogViewer.ElasticCommonSchema.Properties;
 using Analogy.LogViewer.ElasticCommonSchema.UserControls;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {

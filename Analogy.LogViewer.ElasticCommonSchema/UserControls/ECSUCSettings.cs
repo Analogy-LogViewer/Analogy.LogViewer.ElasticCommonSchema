@@ -41,14 +41,12 @@ namespace Analogy.LogViewer.ElasticCommonSchema.UserControls
                     File.WriteAllText(saveFileDialog.FileName, JsonConvert.SerializeObject(Settings));
                     MessageBox.Show("File Saved", @"Export settings", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error Export: " + ex.Message, @"Error Saving file", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-
             }
         }
 
@@ -67,7 +65,6 @@ namespace Analogy.LogViewer.ElasticCommonSchema.UserControls
                     LoadSettings(settings);
                     MessageBox.Show("File Imported. Save settings if desired", @"Import settings", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-
                 }
                 catch (Exception ex)
                 {
@@ -79,11 +76,9 @@ namespace Analogy.LogViewer.ElasticCommonSchema.UserControls
 
         private void LoadSettings(ECSSettings logSettings)
         {
-
             cbShowAllMetadataFields.Checked = logSettings.ShowAllColumnsFromMetaDataField;
             lstbAdditionalColumn.Items.Clear();
             lstbAdditionalColumn.Items.AddRange(logSettings.AdditionalColumnsFromMetaDataField.ToArray());
-
         }
 
         private void SerilogUCSettings_Load(object sender, EventArgs e)

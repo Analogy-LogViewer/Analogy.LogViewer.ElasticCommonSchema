@@ -28,8 +28,8 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         public string Message { get; }
         public string[] Required { get; }
         public string[] All { get; }
-        string Prefix = "@";
-        string EscapedInitialAt = "@@";
+        private string Prefix = "@";
+        private string EscapedInitialAt = "@@";
 
         public CompactJsonFormatMessageFields()
         {
@@ -44,7 +44,6 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             EscapedInitialAt = "@@";
             All = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings, EventId, Message };
             Required = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings };
-
         }
         public string Unescape(string name)
         {
@@ -64,7 +63,6 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         }
     }
 
-
     public class JsonFormatMessageFields : IMessageFields
     {
         public string Timestamp { get; }
@@ -77,8 +75,8 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
 
         public string[] All { get; }
         public string[] Required { get; }
-        string Prefix = "@";
-        string EscapedInitialAt = "@@";
+        private string Prefix = "@";
+        private string EscapedInitialAt = "@@";
 
         public JsonFormatMessageFields()
         {
@@ -91,7 +89,6 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             Message = "@m";
             All = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings, EventId, Message };
             Required = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings };
-
         }
         public string Unescape(string name)
         {
@@ -122,8 +119,8 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         public string Message { get; }
         public string[] All { get; }
         public string[] Required { get; }
-        string Prefix = "@";
-        string EscapedInitialAt = "@@";
+        private string Prefix = "@";
+        private string EscapedInitialAt = "@@";
         public ECSFormatMessageFields()
         {
             Timestamp = "@timestamp";
@@ -133,11 +130,8 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             Renderings = "RenderedMessage";
             EventId = "@i";
             Message = "message";
-            All = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings, EventId, Message
-        };
-            Required = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings
-        };
-
+            All = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings, EventId, Message, };
+            Required = new[] { Timestamp, MessageTemplate, Level, Exception, Renderings, };
         }
         public string Unescape(string name)
         {
@@ -157,4 +151,3 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         }
     }
 }
-

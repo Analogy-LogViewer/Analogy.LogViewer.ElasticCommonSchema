@@ -1,14 +1,13 @@
-﻿using System;
-using System.IO;
-using Analogy.LogViewer.Template.Managers;
+﻿using Analogy.LogViewer.Template.Managers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.Managers
 {
     public class UserSettingsManager
     {
-
         private static readonly Lazy<UserSettingsManager> _instance =
             new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
@@ -19,14 +18,12 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Managers
 
         public UserSettingsManager()
         {
-
             //check if local file exist:
             var loaded = LoadFileSettings(LocalSettingFileName, true);
             if (!loaded)
             {
                 LoadFileSettings(SerilogPerUserFileSetting, false);
             }
-
         }
 
         private bool LoadFileSettings(string localSettingFileName, bool optional)
@@ -37,14 +34,13 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Managers
                 {
                     var settings = new JsonSerializerSettings
                     {
-                        ObjectCreationHandling = ObjectCreationHandling.Replace
+                        ObjectCreationHandling = ObjectCreationHandling.Replace,
                     };
                     string data = File.ReadAllText(localSettingFileName);
                     Settings = JsonConvert.DeserializeObject<ECSSettings>(data, settings);
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
                         Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
-
                     }
                     return true;
                 }
@@ -55,7 +51,6 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Managers
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
                         Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
-
                     }
                     return true;
                 }
@@ -68,7 +63,6 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Managers
                     if (string.IsNullOrEmpty(Settings.FileOpenDialogFilters))
                     {
                         Settings.FileOpenDialogFilters = "All Supported formats (*.Clef;*.log;*.gz)|*.clef;*.log;*.gz|Clef format (*.clef)|*.clef|Plain log text file (*.log)|*.log|GZIP file (*.gz)|*.gz";
-
                     }
                     return false;
                 }
@@ -81,7 +75,6 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Managers
         {
             try
             {
-
                 if (File.Exists(LocalSettingFileName))
                 {
                     try

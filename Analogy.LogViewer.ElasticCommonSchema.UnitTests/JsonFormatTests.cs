@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.UnitTests
 {
@@ -24,7 +24,6 @@ namespace Analogy.LogViewer.Elastic.CommonSchema.Serilog.UnitTests
             //Assert.IsTrue(messages[0].MachineName == "MY-MACHINE");
             //Assert.IsTrue(messages[1].Text.StartsWith("An unknown error occurred"));
             //Assert.IsTrue((messages[1].Module == "My process"));
-
         }
 
         //[TestMethod]

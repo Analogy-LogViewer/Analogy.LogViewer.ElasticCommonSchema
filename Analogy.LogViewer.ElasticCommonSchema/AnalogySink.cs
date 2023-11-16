@@ -1,23 +1,22 @@
-﻿using System;
-using System.IO;
-using Serilog;
+﻿using Serilog;
 using Serilog.Configuration;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting;
 using Serilog.Formatting.Display;
 using Serilog.Formatting.Json;
+using System;
+using System.IO;
 
 namespace Analogy.LogViewer.ElasticCommonSchema
 {
-    class AnalogySink : ILogEventSink
+   public class AnalogySink : ILogEventSink
     {
-        readonly ITextFormatter _textFormatter;
+        public readonly ITextFormatter _textFormatter;
         public static string output = string.Empty;
         public AnalogySink(ITextFormatter textFormatter)
         {
             _textFormatter = textFormatter ?? throw new ArgumentNullException(nameof(textFormatter));
-
         }
 
         public void Emit(LogEvent logEvent)
@@ -33,9 +32,9 @@ namespace Analogy.LogViewer.ElasticCommonSchema
         }
     }
 
-    public static class LoggerConfigurationExtensions
+   public static class LoggerConfigurationExtensions
     {
-        const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
+        private const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
 
         /// <summary>
         /// Write log events to the <see cref="System.Diagnostics.Trace"/>.

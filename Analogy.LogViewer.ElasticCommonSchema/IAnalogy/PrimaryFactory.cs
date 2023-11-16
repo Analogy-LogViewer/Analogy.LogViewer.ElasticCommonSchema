@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.ElasticCommonSchema.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Analogy.Interfaces;
-using Analogy.LogViewer.ElasticCommonSchema.Properties;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
@@ -16,7 +16,5 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
         public override string About { get; set; } = "Elastic Common Schema Parsers for Analogy Log Viewer";
         public override Image SmallImage { get; set; } = Resources.AnalogyECS16x16;
         public override Image LargeImage { get; set; } = Resources.AnalogyECS32x32;
-
-
     }
 }

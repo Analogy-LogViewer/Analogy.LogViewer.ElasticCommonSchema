@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using System;
 using System.Collections.Generic;
-using Analogy.Interfaces;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
@@ -11,6 +11,5 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 
         public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } =
             new List<IAnalogyDataProvider> { new OfflineDataProvider() };
-
     }
 }

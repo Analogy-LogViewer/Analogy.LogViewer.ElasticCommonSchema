@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using System;
 using System.Collections.Generic;
-using Analogy.Interfaces;
 
 namespace Analogy.LogViewer.ElasticCommonSchema
 {
@@ -9,7 +9,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema
         public static IEnumerable<AnalogyChangeLog> GetChangeLog() =>
         new List<AnalogyChangeLog>
         {
-            new AnalogyChangeLog("Initial version", AnalogChangeLogType.None, "Lior Banai", new DateTime(2023, 05, 12), "")
+            new AnalogyChangeLog("Initial version", AnalogChangeLogType.None, "Lior Banai", new DateTime(2023, 05, 12), ""),
         };
     }
 }

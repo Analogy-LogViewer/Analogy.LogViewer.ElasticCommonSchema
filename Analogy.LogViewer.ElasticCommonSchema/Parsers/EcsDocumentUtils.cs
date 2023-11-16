@@ -7,7 +7,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 {
     public static class EcsDocumentUtils
     {
-        public static IAnalogyLogMessage ParseLine(string line,bool addAllMetadataFields, List<string> addSpecificMetadataFields)
+        public static IAnalogyLogMessage ParseLine(string line, bool addAllMetadataFields, List<string> addSpecificMetadataFields)
         {
             string GetMessage(EcsDocument ecsDocument)
             {
@@ -22,7 +22,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
             try
             {
                 var entry = EcsDocument.Deserialize(line);
-            AnalogyLogMessage message = new()
+                AnalogyLogMessage message = new()
             {
                 Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
                 Level = AnalogyLogMessage.ParseLogLevelFromString(entry.Log.Level),
@@ -39,15 +39,15 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 Source = entry.Log?.Logger ?? string.Empty,
                 User = entry.User?.Name ?? "",
             };
-            if (entry.Error?.Message is not null)
+                if (entry.Error?.Message is not null)
             {
                 message.AddOrReplaceAdditionalProperty("Error", entry.Error.Message);
             }
-            if (entry.Error?.StackTrace is not null)
+                if (entry.Error?.StackTrace is not null)
             {
                 message.AddOrReplaceAdditionalProperty("StackTrace", entry.Error.StackTrace);
             }
-            if (entry.Log?.Logger is not null)
+                if (entry.Log?.Logger is not null)
             {
                 message.AddOrReplaceAdditionalProperty("Logger", entry.Log.Logger);
             }
