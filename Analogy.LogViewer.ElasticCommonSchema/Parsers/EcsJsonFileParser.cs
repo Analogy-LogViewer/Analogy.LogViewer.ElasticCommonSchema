@@ -5,6 +5,7 @@ using Elastic.CommonSchema;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,27 +35,34 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 AnalogyLogMessage empty = new AnalogyLogMessage($"File is null or empty. Aborting.",
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
-                    Source = "Analogy", Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
+                    Source = "Analogy",
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, fileName);
                 return new List<IAnalogyLogMessage> { empty };
             }
 
-            List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
+            List<IAnalogyLogMessage> messages = new();
             try
             {
-#if NET
-                var jsonLines = await System.IO.File.ReadAllLinesAsync(fileName, token);
-#else
-                var jsonLines = System.IO.File.ReadAllLines(fileName);
-#endif
-                foreach (var line in jsonLines)
+                using (var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
-                    var message = EcsDocumentUtils.ParseLine(line, UserSettingsManager.UserSettings.Settings.ShowAllColumnsFromMetaDataField, UserSettingsManager.UserSettings.Settings.AdditionalColumnsFromMetaDataField);
-                    messages.Add(message);
-                    messagesHandler.AppendMessage(message, fileName);
+                    long count = 0;
+                    using (var reader = new StreamReader(stream))
+                    {
+                        while (!reader.EndOfStream && !token.IsCancellationRequested)
+                        {
+                            var line = await reader.ReadLineAsync();
+                            var message = EcsDocumentUtils.ParseLine(line,
+                                UserSettingsManager.UserSettings.Settings.ShowAllColumnsFromMetaDataField,
+                                UserSettingsManager.UserSettings.Settings.AdditionalColumnsFromMetaDataField);
+                            messages.Add(message);
+                            messagesHandler.AppendMessage(message, fileName);
+                        }
+
+                        return messages;
+                    }
                 }
-                return messages;
             }
             catch (Exception e)
             {
@@ -62,7 +70,8 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                     $"Error occurred processing file {fileName}. Reason: {e.Message}",
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
-                    Source = "Analogy", Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
+                    Source = "Analogy",
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, fileName);
                 return new List<AnalogyLogMessage> { empty };

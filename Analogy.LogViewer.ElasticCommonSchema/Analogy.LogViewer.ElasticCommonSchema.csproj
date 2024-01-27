@@ -11,7 +11,7 @@
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema</RepositoryUrl>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<PackageIcon>AnalogyECS128x128.png</PackageIcon>
-		<Version>6.0.0</Version>
+		<Version>6.0.1</Version>
 		<Company>Analogy.LogViewer</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
