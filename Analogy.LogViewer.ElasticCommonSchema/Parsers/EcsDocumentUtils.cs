@@ -21,36 +21,36 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
 
             try
             {
-                var entry = EcsDocument.Deserialize(line);
+                var entry = EcsDocument.Deserialize(line.Trim());
                 AnalogyLogMessage message = new()
-            {
-                Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
-                Level = AnalogyLogMessage.ParseLogLevelFromString(entry.Log.Level),
-                RawText = line,
-                RawTextType = AnalogyRowTextType.JSON,
-                Text = GetMessage(entry),
-                MachineName = entry.Host?.Hostname ?? "",
-                ProcessId = (int)(entry.Process?.Pid ?? 0),
-                ThreadId = (int)(entry.Process?.ThreadId ?? 0),
-                LineNumber = (int)(entry.Log?.OriginFileLine ?? 0),
-                MethodName = entry.Log?.OriginFunction ?? "",
-                FileName = entry.Log?.OriginFileName ?? "",
-                Module = entry.Process?.Name ?? string.Empty,
-                Source = entry.Log?.Logger ?? string.Empty,
-                User = entry.User?.Name ?? "",
-            };
+                {
+                    Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
+                    Level = AnalogyLogMessage.ParseLogLevelFromString(entry.Log?.Level ?? "Unknown"),
+                    RawText = line,
+                    RawTextType = AnalogyRowTextType.JSON,
+                    Text = GetMessage(entry),
+                    MachineName = entry.Host?.Hostname ?? "",
+                    ProcessId = (int)(entry.Process?.Pid ?? 0),
+                    ThreadId = (int)(entry.Process?.ThreadId ?? 0),
+                    LineNumber = (int)(entry.Log?.OriginFileLine ?? 0),
+                    MethodName = entry.Log?.OriginFunction ?? "",
+                    FileName = entry.Log?.OriginFileName ?? "",
+                    Module = entry.Process?.Name ?? string.Empty,
+                    Source = entry.Log?.Logger ?? string.Empty,
+                    User = entry.User?.Name ?? "",
+                };
                 if (entry.Error?.Message is not null)
-            {
-                message.AddOrReplaceAdditionalProperty("Error", entry.Error.Message);
-            }
+                {
+                    message.AddOrReplaceAdditionalProperty("Error", entry.Error.Message);
+                }
                 if (entry.Error?.StackTrace is not null)
-            {
-                message.AddOrReplaceAdditionalProperty("StackTrace", entry.Error.StackTrace);
-            }
+                {
+                    message.AddOrReplaceAdditionalProperty("StackTrace", entry.Error.StackTrace);
+                }
                 if (entry.Log?.Logger is not null)
-            {
-                message.AddOrReplaceAdditionalProperty("Logger", entry.Log.Logger);
-            }
+                {
+                    message.AddOrReplaceAdditionalProperty("Logger", entry.Log?.Logger);
+                }
 
                 //if (entry.Labels is not null)
                 //{
