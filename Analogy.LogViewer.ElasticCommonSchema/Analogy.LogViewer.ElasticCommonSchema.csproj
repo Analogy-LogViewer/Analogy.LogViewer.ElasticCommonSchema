@@ -11,15 +11,15 @@
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.ElasticCommonSchema</RepositoryUrl>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<PackageIcon>AnalogyECS128x128.png</PackageIcon>
-		<Version>7.2.0</Version>
+		<Version>8.0.0</Version>
 		<Company>Analogy.LogViewer</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="7.2.0" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="7.2.0" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="7.2.0" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="8.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="8.0.0" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="8.0.0" />
 		<PackageReference Include="Elastic.CommonSchema" Version="8.12.3" />
 		<PackageReference Include="Elastic.CommonSchema.Serilog" Version="8.12.3" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

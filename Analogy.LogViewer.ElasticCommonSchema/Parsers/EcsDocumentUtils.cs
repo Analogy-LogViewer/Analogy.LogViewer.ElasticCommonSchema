@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Elastic.CommonSchema;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Parsers
                 var entry = EcsDocument.Deserialize(line.Trim());
                 AnalogyLogMessage message = new()
                 {
-                    Date = entry.Timestamp?.DateTime ?? DateTime.MinValue,
+                    Date = entry.Timestamp ?? DateTimeOffset.MinValue,
                     Level = AnalogyLogMessage.ParseLogLevelFromString(entry.Log?.Level ?? "Unknown"),
                     RawText = line,
                     RawTextType = AnalogyRowTextType.JSON,

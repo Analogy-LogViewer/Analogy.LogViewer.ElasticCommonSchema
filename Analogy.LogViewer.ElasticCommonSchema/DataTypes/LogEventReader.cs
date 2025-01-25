@@ -17,11 +17,11 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
     /// </summary>
     public class LogEventReader : IDisposable
     {
-       private static readonly MessageTemplateParser Parser = new MessageTemplateParser();
-       private readonly TextReader _text;
-       private readonly JsonSerializer _serializer;
-       private readonly IMessageFields _messageFields;
-       private int _lineNumber;
+        private static readonly MessageTemplateParser Parser = new MessageTemplateParser();
+        private readonly TextReader _text;
+        private readonly JsonSerializer _serializer;
+        private readonly IMessageFields _messageFields;
+        private int _lineNumber;
 
         /// <summary>
         /// Construct a <see cref="LogEventReader"/>.
@@ -29,7 +29,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         /// <param name="text">Text to read from.</param>
         /// <param name="messageFields"></param>
         /// <param name="serializer">If specified, a JSON serializer used when converting event documents.</param>
-       public LogEventReader(TextReader text, IMessageFields messageFields, JsonSerializer serializer = null)
+        public LogEventReader(TextReader text, IMessageFields messageFields, JsonSerializer serializer = null)
         {
             _messageFields = messageFields;
             _text = text ?? throw new ArgumentNullException(nameof(text));
@@ -37,7 +37,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         }
 
         /// <inheritdoc/>
-       public void Dispose()
+        public void Dispose()
         {
             _text.Dispose();
         }
@@ -48,7 +48,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         /// <param name="result"></param>
         /// <returns>True if an event could be read; false if the end-of-file was encountered.</returns>
         /// <exception cref="InvalidDataException">The data format is invalid.</exception>
-       public bool TryRead(out ParsingResult result)
+        public bool TryRead(out ParsingResult result)
         {
             var line = _text.ReadLine();
             _lineNumber++;
@@ -79,7 +79,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         /// <param name="document">The event in compact-JSON.</param>
         /// <param name="serializer">If specified, a JSON serializer used when converting event documents.</param>
         /// <returns>The log event.</returns>
-       public LogEvent ReadFromString(string document, JsonSerializer serializer = null)
+        public LogEvent ReadFromString(string document, JsonSerializer serializer = null)
         {
             if (document == null)
             {
@@ -96,7 +96,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
         /// </summary>
         /// <param name="jObject">The deserialized compact-JSON event.</param>
         /// <returns>The log event.</returns>
-       public static LogEvent ReadFromJObject(JObject jObject, IMessageFields messageFields)
+        public static LogEvent ReadFromJObject(JObject jObject, IMessageFields messageFields)
         {
             if (jObject == null)
             {
@@ -106,7 +106,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             return ReadFromJObject(1, jObject, messageFields);
         }
 
-       private static LogEvent ReadFromJObject(int lineNumber, JObject jObject, IMessageFields messageFields)
+        private static LogEvent ReadFromJObject(int lineNumber, JObject jObject, IMessageFields messageFields)
         {
             var timestamp = GetRequiredTimestampField(lineNumber, jObject, messageFields.Timestamp);
 
@@ -192,7 +192,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             return new LogEvent(timestamp, level, exception, parsedTemplate, properties);
         }
 
-       private static Exception TryPopulateException(string header, Exception exception, JObject data)
+        private static Exception TryPopulateException(string header, Exception exception, JObject data)
         {
             if (data.TryGetValue("ExceptionDetail", out var info))
             {
@@ -206,7 +206,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             return new TextException(header);
         }
 
-       private static bool TryGetOptionalField(int lineNumber, JObject data, string field, out string value)
+        private static bool TryGetOptionalField(int lineNumber, JObject data, string field, out string value)
         {
             JToken token;
             if (!data.TryGetValue(field, out token) || token.Type == JTokenType.Null)
@@ -224,7 +224,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             return true;
         }
 
-       private static DateTimeOffset GetRequiredTimestampField(int lineNumber, JObject data, string field)
+        private static DateTimeOffset GetRequiredTimestampField(int lineNumber, JObject data, string field)
         {
             if (!data.TryGetValue(field, out var token) || token.Type == JTokenType.Null)
             {
@@ -238,8 +238,11 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
                 {
                     return offset;
                 }
-
-                return (DateTime)dt;
+                if (dt is DateTime time)
+                {
+                    return new DateTimeOffset(time, TimeSpan.Zero);
+                }
+                return DateTimeOffset.MinValue;
             }
 
             if (token.Type != JTokenType.String)
@@ -251,7 +254,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.DataTypes
             return DateTimeOffset.Parse(text);
         }
 
-       private static JsonSerializer CreateSerializer()
+        private static JsonSerializer CreateSerializer()
         {
             return JsonSerializer.Create(new JsonSerializerSettings
             {
