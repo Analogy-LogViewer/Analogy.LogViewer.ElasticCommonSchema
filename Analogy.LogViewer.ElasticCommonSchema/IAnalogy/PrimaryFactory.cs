@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
-    public class PrimaryFactory : Analogy.LogViewer.Template.PrimaryFactory
+    public class PrimaryFactory : Analogy.LogViewer.Template.PrimaryFactoryWinforms
     {
         internal static Guid Id { get; } = new Guid("0423c76e-7753-43f4-94c5-2608c40dcf77");
         public override Guid FactoryId { get; set; } = Id;

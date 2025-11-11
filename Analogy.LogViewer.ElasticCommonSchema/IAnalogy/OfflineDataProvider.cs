@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
-    public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProvider
+    public class OfflineDataProvider : Analogy.LogViewer.Template.OfflineDataProviderWinforms
     {
         public override Guid Id { get; set; } = new Guid("1e3e3bb2-3130-4311-8c47-740a5f692d6d");
         public override Image LargeImage { get; set; } = Resources.AnalogyECS32x32;

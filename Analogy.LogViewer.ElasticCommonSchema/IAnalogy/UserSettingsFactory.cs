@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
-    public class UserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactory
+    public class UserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactoryWinforms
     {
         public override string Title { get; set; } = "Elastic Common Schema User Settings";
         public override UserControl DataProviderSettings { get; set; }
