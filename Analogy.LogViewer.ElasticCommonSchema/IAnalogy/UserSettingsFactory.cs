@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.ElasticCommonSchema.Properties;
 using Analogy.LogViewer.ElasticCommonSchema.UserControls;
+using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Drawing;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
-    public class UserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactoryWinForms
+    public class UserSettingsFactory : TemplateUserSettingsFactoryWinForms
     {
         public override string Title { get; set; } = "Elastic Common Schema User Settings";
         public override UserControl DataProviderSettings { get; set; }
