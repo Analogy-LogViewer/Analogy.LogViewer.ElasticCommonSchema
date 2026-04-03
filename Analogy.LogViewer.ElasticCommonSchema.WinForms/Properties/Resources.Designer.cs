@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Analogy.LogViewer.ElasticCommonSchema.Properties {
+namespace Analogy.LogViewer.ElasticCommonSchema.WinForms.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Analogy.LogViewer.ElasticCommonSchema.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Analogy.LogViewer.ElasticCommonSchema.WinForms.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

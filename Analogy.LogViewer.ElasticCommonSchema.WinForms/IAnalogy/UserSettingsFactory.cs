@@ -1,6 +1,5 @@
-﻿using Analogy.Interfaces;
-using Analogy.LogViewer.ElasticCommonSchema.Properties;
-using Analogy.LogViewer.ElasticCommonSchema.UserControls;
+﻿using Analogy.LogViewer.ElasticCommonSchema.UserControls;
+using Analogy.LogViewer.ElasticCommonSchema.WinForms.Properties;
 using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using System;

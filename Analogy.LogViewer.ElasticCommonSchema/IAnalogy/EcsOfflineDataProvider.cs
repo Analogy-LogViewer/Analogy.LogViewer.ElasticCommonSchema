@@ -3,9 +3,8 @@ using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.ElasticCommonSchema.DataTypes;
 using Analogy.LogViewer.ElasticCommonSchema.Managers;
 using Analogy.LogViewer.ElasticCommonSchema.Parsers;
-using Analogy.LogViewer.ElasticCommonSchema.Properties;
+using Analogy.LogViewer.Template;
 using Analogy.LogViewer.Template.Managers;
-using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,11 +16,9 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 {
-    public class OfflineDataProvider : OfflineDataProviderWinForms
+    public class EcsOfflineDataProvider : OfflineDataProvider
     {
         public override Guid Id { get; set; } = new Guid("1e3e3bb2-3130-4311-8c47-740a5f692d6d");
-        public override Image LargeImage { get; set; } = Resources.AnalogyECS32x32;
-        public override Image SmallImage { get; set; } = Resources.AnalogyECS16x16;
         public override string OptionalTitle { get; set; } = "Elastic Common Schema parser";
         public override bool CanSaveToLogFile { get; set; }
         public override string FileOpenDialogFilters { get; set; } = UserSettingsManager.UserSettings.Settings.FileOpenDialogFilters;
@@ -38,7 +35,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
 
         public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
-        public OfflineDataProvider()
+        public EcsOfflineDataProvider()
         {
             EcsJsonFileParser = new EcsJsonFileParser(new JsonFormatMessageFields());
         }
@@ -53,7 +50,7 @@ namespace Analogy.LogViewer.ElasticCommonSchema.IAnalogy
             {
                 return await EcsJsonFileParser.Process(fileName, token, messagesHandler);
             }
-            LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(OfflineDataProvider));
+            LogManager.Instance.LogError($"Unsupported File {fileName}", nameof(EcsOfflineDataProvider));
             return new List<AnalogyLogMessage>(0);
         }
 
