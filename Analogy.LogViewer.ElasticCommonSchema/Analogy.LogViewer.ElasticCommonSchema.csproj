@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFrameworks>net10.0;net9.0;net8.0;net48</TargetFrameworks>
-		<VersionPrefix>9.0.6</VersionPrefix>
+		<VersionPrefix>9.0.6.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<AssemblyName>Analogy.LogViewer.ElasticCommonSchema</AssemblyName>
 		<PackageId>Analogy.LogViewer.ElasticCommonSchema</PackageId>
@@ -23,14 +23,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.3" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.2" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.3" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="9.0.6" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="9.0.6" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="9.0.6" />
 		<PackageReference Include="Elastic.CommonSchema" Version="9.0.0" />
 		<PackageReference Include="Elastic.CommonSchema.Serilog" Version="9.0.0" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Serilog" Version="4.3.1" />
-		<PackageReference Include="System.Resources.Extensions" Version="10.0.7" />
+		<PackageReference Include="System.Resources.Extensions" Version="10.0.9" />
 	</ItemGroup>
 
 	<ItemGroup>
